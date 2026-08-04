@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "236454784534",
+    "project_id": "du-an-ton",
+    "storage_bucket": "du-an-ton.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236454784534:android:e32f49f3872e2f914d0f37",
+        "android_client_info": {
+          "package_name": "com.example.duanton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236454784534-j9kfu50cpvqep3j9m3r6om4s9bgndf62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR7d8_ec7Fva717Ci_D9__f6y41jVsYeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236454784534-j9kfu50cpvqep3j9m3r6om4s9bgndf62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
