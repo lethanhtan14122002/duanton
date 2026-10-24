@@ -4,7 +4,8 @@ import 'package:duanton/firebase_options.dart';
 import 'package:duanton/giaodienchinh/tan.dart';
 import 'package:duanton/login/login.dart';
 import 'package:duanton/ui/duoi.dart';
-import 'package:duanton/ui/sanphamuudai.dart';
+import 'package:duanton/ui/sanphamuudailaptop.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:duanton/ui/trendau.dart';
@@ -31,11 +32,11 @@ class _tonState extends State<ton> {
       debugShowCheckedModeBanner: false,
       title: 'Website Thương mại',
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: 'showsanpham',
+      initialRoute: 'sanphamuudai',
       routes: {
         'trendau': (context) => Trendau(),
         'duoi': (context) => FooterWidget(),
-        'tan': (context) => Tan(),
+        'giaodienchinh': (context) => Tan(),
         'login': (context) => AuthScreen(),
         'sanpham': (context) => AddProductScreen(),
         'showsanpham': (context) => ProductListScreen(),

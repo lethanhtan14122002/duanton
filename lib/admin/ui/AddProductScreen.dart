@@ -753,14 +753,27 @@ class _AddProductScreenState extends State<AddProductScreen> {
         _buildLabel(label),
         DropdownButtonFormField<String>(
           value: value,
+          isExpanded: true,
           icon: const Icon(Icons.keyboard_arrow_down, size: 20),
           style: const TextStyle(fontSize: 13, color: textColor),
+
+          // Hiển thị gọn lựa chọn đang chọn, không tràn sang mũi tên.
+          selectedItemBuilder: (context) {
+            return items.map((item) {
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: Text(item, maxLines: 1, overflow: TextOverflow.ellipsis),
+              );
+            }).toList();
+          },
+
           autovalidateMode: _autoValidate
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
           validator: (v) => v == null ? 'Vui lòng chọn $label' : null,
           decoration: InputDecoration(
             hintText: hintText,
+            hintMaxLines: 1,
             hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 13),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 12,
@@ -789,9 +802,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ),
             errorStyle: const TextStyle(fontSize: 11, color: Colors.red),
           ),
-          items: items
-              .map((item) => DropdownMenuItem(value: item, child: Text(item)))
-              .toList(),
+          items: items.map((item) {
+            return DropdownMenuItem<String>(
+              value: item,
+              child: Text(item, maxLines: 1, overflow: TextOverflow.ellipsis),
+            );
+          }).toList(),
           onChanged: onChanged,
         ),
       ],
@@ -1046,8 +1062,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget _buildActionButtons() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      child: Wrap(
+        alignment: WrapAlignment.end,
+        spacing: 12,
+        runSpacing: 12,
         children: [
           OutlinedButton(
             onPressed: _resetForm,
@@ -1062,26 +1080,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
               style: TextStyle(color: Colors.black87, fontSize: 13),
             ),
           ),
-          const SizedBox(width: 12),
-          OutlinedButton.icon(
-            onPressed: () => _saveProductToFirebase(isDraft: true),
-            icon: const Icon(
-              Icons.save_outlined,
-              size: 16,
-              color: Colors.black87,
-            ),
-            label: const Text(
-              'Lưu nháp',
-              style: TextStyle(color: Colors.black87, fontSize: 13),
-            ),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
           ElevatedButton.icon(
             onPressed: () => _saveProductToFirebase(isDraft: false),
             icon: const Icon(Icons.check, size: 16, color: Colors.white),

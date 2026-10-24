@@ -4,19 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
-// =============================================================================
-// BOTTOM SHEET SỬA SẢN PHẨM
-// Yêu cầu pubspec.yaml:
-//   dependencies:
-//     image_picker: ^1.1.2
-//
-// Android — android/app/src/main/AndroidManifest.xml, thêm trong <manifest>:
-//   <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-//
-// iOS — ios/Runner/Info.plist, thêm:
-//   <key>NSPhotoLibraryUsageDescription</key>
-//   <string>Ứng dụng cần truy cập ảnh để chọn ảnh sản phẩm.</string>
-// =============================================================================
 class EditProductSheet extends StatefulWidget {
   final String docId;
   final Map<String, dynamic> data;
@@ -922,6 +909,8 @@ class _EditProductSheetState extends State<EditProductSheet> {
         DropdownButtonFormField<String>(
           value: value,
           validator: validator,
+          // Cho phần chữ dùng hết chiều rộng còn lại, tránh tràn sang icon.
+          isExpanded: true,
           autovalidateMode: _autoValidate
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
@@ -954,8 +943,31 @@ class _EditProductSheetState extends State<EditProductSheet> {
             ),
             errorStyle: const TextStyle(fontSize: 11, color: Colors.red),
           ),
+          // Rút gọn tên dài thay vì làm vỡ hàng.
           items: items
-              .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+              .map(
+                (item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              )
+              .toList(),
+          // Áp dụng ellipsis cả cho giá trị đang được chọn trong ô.
+          selectedItemBuilder: (context) => items
+              .map(
+                (item) => Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    item,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              )
               .toList(),
           onChanged: onChanged,
         ),

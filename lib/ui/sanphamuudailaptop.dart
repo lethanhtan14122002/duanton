@@ -88,6 +88,7 @@ class _SanPhamUuDaiSectionState extends State<SanPhamUuDaiSection> {
                   fontWeight: FontWeight.bold,
                   color: _blue,
                   letterSpacing: 0.5,
+                  decoration: TextDecoration.none,
                 ),
               ),
               const SizedBox(height: 24),
@@ -320,6 +321,7 @@ class _ProductCardState extends State<_ProductCard> {
                             color: Colors.red,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none,
                           ),
                         ),
                       ),
@@ -329,26 +331,28 @@ class _ProductCardState extends State<_ProductCard> {
                   AnimatedOpacity(
                     duration: const Duration(milliseconds: 180),
                     opacity: _hovering ? 1 : 0,
-                    child: Positioned(
-                      top: 8,
-                      right: 8,
+                    child: // Giỏ hàng – luôn hiện, nằm ngay phía trên thanh chi tiết
+                    Positioned(
+                      bottom: 0,
                       child: GestureDetector(
                         onTap: widget.onAddToCart,
                         child: Container(
-                          padding: const EdgeInsets.all(6),
+                          width: 50,
+                          height: 50,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
+                            shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
+                                color: Colors.black.withOpacity(0.18),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
                               ),
                             ],
                           ),
                           child: const Icon(
                             Icons.shopping_cart,
-                            size: 20,
+                            size: 22,
                             color: Colors.black87,
                           ),
                         ),
@@ -357,13 +361,13 @@ class _ProductCardState extends State<_ProductCard> {
                   ),
 
                   // Overlay "chi tiết sản phẩm" – hiện khi hover
-                  AnimatedOpacity(
-                    duration: const Duration(milliseconds: 180),
-                    opacity: _hovering ? 1 : 0,
-                    child: Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 180),
+                      opacity: _hovering ? 1 : 0,
                       child: GestureDetector(
                         onTap: widget.onViewDetail,
                         child: Container(
@@ -371,7 +375,7 @@ class _ProductCardState extends State<_ProductCard> {
                           decoration: BoxDecoration(
                             color: _overlayBlue.withOpacity(0.88),
                             borderRadius: const BorderRadius.vertical(
-                              bottom: Radius.zero,
+                              bottom: Radius.circular(8),
                             ),
                           ),
                           child: const Center(
@@ -382,6 +386,7 @@ class _ProductCardState extends State<_ProductCard> {
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: 0.3,
+                                decoration: TextDecoration.none,
                               ),
                             ),
                           ),
@@ -406,6 +411,7 @@ class _ProductCardState extends State<_ProductCard> {
                       style: TextStyle(
                         fontSize: 11,
                         color: Colors.grey.shade500,
+                        decoration: TextDecoration.none,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -418,6 +424,7 @@ class _ProductCardState extends State<_ProductCard> {
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF222222),
                         height: 1.35,
+                        decoration: TextDecoration.none,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -433,7 +440,7 @@ class _ProductCardState extends State<_ProductCard> {
                             _formatPrice(giaGoc),
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey.shade500,
+                              color: Colors.black54,
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
@@ -446,6 +453,7 @@ class _ProductCardState extends State<_ProductCard> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF222222),
+                            decoration: TextDecoration.none,
                           ),
                         ),
                       ],
@@ -457,6 +465,7 @@ class _ProductCardState extends State<_ProductCard> {
                       style: TextStyle(
                         fontSize: 11,
                         color: Colors.grey.shade400,
+                        decoration: TextDecoration.none,
                       ),
                     ),
                   ],
